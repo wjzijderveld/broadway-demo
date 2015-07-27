@@ -9,11 +9,17 @@ doctrine:
         connections:
             default:
                 driver: pdo_sqlite
+                path: "%kernel.cache_dir%.events_default.sqlite"
+            broadway:
+                driver: pdo_sqlite
                 path: "%kernel.cache_dir%.events.sqlite"
 
 broadway:
     read_model:
         repository: elasticsearch
+    event_store:
+        dbal:
+            connection: broadway
 
 parameters:
     storage_suffix: "_%kernel.environment%"
